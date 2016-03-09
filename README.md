@@ -15,7 +15,7 @@ Use with caution.
 
 Add this extension to your `Gemfile`:
 ```ruby
-gem 'solidus_social', git: 'git://github.com/solidusio-contrib/solidus_social.git'
+gem 'solidus_social', github: 'solidusio-contrib/solidus_social'
 ```
 
 Then run:
