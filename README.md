@@ -12,7 +12,7 @@ Facebook, Github, Google OAuth2, and Amazon are available out of the box.
 Add this extension to your `Gemfile`:
 
 ```ruby
-gem 'solidus_social'
+gem 'solidus_social', github: 'solidusio-contrib/solidus_social'
 ```
 
 Then run:
