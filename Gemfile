@@ -18,7 +18,7 @@ else
   gem 'factory_bot', '> 4.10.0'
 end
 
-gem 'pg', '~> 0.21'
+gem 'pg', '~> 1.1'
 gem 'mysql2', '~> 0.4.10'
 
 group :test do
