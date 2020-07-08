@@ -17,6 +17,8 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   Spree::SocialConfig.providers.keys.each do |provider|
     provides_callback_for provider
   end
+  
+  after_action :set_current_order, only: Spree::SocialConfig.providers.keys
 
   def omniauth_callback
     if request.env['omniauth.error'].present?
