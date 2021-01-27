@@ -25,7 +25,9 @@
       <col style="width: 20%" />
     </colgroup>
     <thead data-hook="admin_social_methods_index_headers">
+      <th><%= I18n.t('spree.store') %></th>
       <th><%= I18n.t('spree.social_provider') %></th>
+      <th><%= I18n.t('spree.site') %></th>
       <th><%= I18n.t('spree.social_api_key') %></th>
       <th><%= I18n.t('spree.social_api_secret') %></th>
       <th><%= I18n.t('spree.environment') %></th>
@@ -35,7 +37,9 @@
     <tbody>
       <% @authentication_methods.each do |method|%>
         <tr id="<%= dom_id method %>" data-hook="admin_trackers_index_rows">
+          <td class="align-center"><%= method.store %></td>
           <td class="align-center"><%= method.provider %></td>
+          <td class="align-center"><%= method.site %></td>
           <td class="align-center"><%= truncate method.api_key, length: 10 %></td>
           <td class="align-center"><%= truncate method.api_secret, length: 10 %></td>
           <td class="align-center"><%= method.environment.to_s.titleize %></td>

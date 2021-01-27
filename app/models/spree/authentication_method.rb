@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class Spree::AuthenticationMethod < ApplicationRecord
+  belongs_to :store
+
   def self.provider_options
     SolidusSocial.configured_providers.map { |provider_name| [provider_name.split("_").first.camelize, provider_name] }
   end
 
-  validates :provider, presence: true
+  validates :provider, presence: true, uniqueness: { scope: :store }
 
   def self.active_authentication_methods?
     where(environment: ::Rails.env, active: true).exists?
