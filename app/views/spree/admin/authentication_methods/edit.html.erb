@@ -1,5 +1,3 @@
-<%= render 'spree/admin/shared/configuration_menu' %>
-
 <% admin_breadcrumb(t('spree.settings') ) %>
 <% admin_breadcrumb link_to I18n.t('spree.social_authentication_methods'), spree.admin_authentication_methods_path %>
 <% admin_breadcrumb I18n.t('spree.edit_social_method', provider: @authentication_method.provider.to_s.titleize) %>
