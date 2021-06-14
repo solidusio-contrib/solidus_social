@@ -29,16 +29,16 @@
       <th><%= I18n.t('spree.social_api_key') %></th>
       <th><%= I18n.t('spree.social_api_secret') %></th>
       <th><%= I18n.t('spree.environment') %></th>
-      <th><%= I18n.t('spree.active') %></th>
+      <th class="align-center"><%= I18n.t('spree.active') %></th>
       <th data-hook="admin_social_methods_index_header_actions" class="actions"></th>
     </thead>
     <tbody>
       <% @authentication_methods.order(:provider, :environment).each do |method|%>
         <tr id="<%= dom_id method %>" data-hook="admin_trackers_index_rows">
-          <td class="align-center"><%= method.provider %></td>
-          <td class="align-center"><%= truncate method.api_key, length: 10 %></td>
-          <td class="align-center"><%= truncate method.api_secret, length: 10 %></td>
-          <td class="align-center"><%= method.environment.to_s.titleize %></td>
+          <td><%= method.provider %></td>
+          <td><%= truncate method.api_key, length: 10 %></td>
+          <td><%= truncate method.api_secret, length: 10 %></td>
+          <td><%= method.environment.to_s.titleize %></td>
           <td class="align-center"><%= method.active ? I18n.t('spree.say_yes') : I18n.t('spree.say_no') %></td>
           <td class="actions">
             <% if can? :manage, Spree::AuthenticationMethod %>
