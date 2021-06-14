@@ -33,7 +33,7 @@
       <th data-hook="admin_social_methods_index_header_actions" class="actions"></th>
     </thead>
     <tbody>
-      <% @authentication_methods.each do |method|%>
+      <% @authentication_methods.order(:provider, :environment).each do |method|%>
         <tr id="<%= dom_id method %>" data-hook="admin_trackers_index_rows">
           <td class="align-center"><%= method.provider %></td>
           <td class="align-center"><%= truncate method.api_key, length: 10 %></td>
