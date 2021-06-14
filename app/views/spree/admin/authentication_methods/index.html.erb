@@ -39,7 +39,7 @@
           <td class="align-center"><%= truncate method.api_key, length: 10 %></td>
           <td class="align-center"><%= truncate method.api_secret, length: 10 %></td>
           <td class="align-center"><%= method.environment.to_s.titleize %></td>
-          <td class="align-center"><%= method.active ? I18n.t('spree.yes') : I18n.t('spree.no') %></td>
+          <td class="align-center"><%= method.active ? I18n.t('spree.say_yes') : I18n.t('spree.say_no') %></td>
           <td class="actions">
             <% if can? :manage, Spree::AuthenticationMethod %>
               <%= link_to_edit method, no_text: true %>
