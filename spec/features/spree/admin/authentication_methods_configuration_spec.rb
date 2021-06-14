@@ -22,7 +22,7 @@ RSpec.describe 'Admin Authentication Methods', :js do
       expect(page).to have_text /NO AUTHENTICATION METHODS FOUND, ADD ONE!/i
 
       click_link 'New Authentication Method'
-      expect(page).to have_text /BACK TO AUTHENTICATION METHODS LIST/i
+      expect(page).to have_button "Create"
       select2 'Test', from: 'Environment'
       select2 'Github', from: 'Social Provider'
 
@@ -53,7 +53,7 @@ RSpec.describe 'Admin Authentication Methods', :js do
         click_icon :edit
       end
 
-      find('#authentication_method_active_false').click
+      find('label[for="authentication_method_active"]').click
 
       click_button 'Update'
       expect(page).to have_text 'successfully updated!'
