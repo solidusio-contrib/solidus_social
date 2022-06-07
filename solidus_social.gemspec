@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency 'coffee-rails'
   spec.add_dependency 'deface'
   spec.add_dependency 'oa-core'
   spec.add_dependency 'omniauth'
