@@ -28,7 +28,9 @@ module SolidusSocial
     ).to_s
 
     initializer 'solidus_social.environment', before: 'spree.environment' do
-      ::Spree::SocialConfig = ::Spree::SocialConfiguration.new
+      Rails.application.config.to_prepare do
+        ::Spree::SocialConfig = ::Spree::SocialConfiguration.new
+      end
     end
 
     initializer 'solidus_social.decorate_spree_user' do |app|
