@@ -138,7 +138,7 @@ RSpec.describe Spree::OmniauthCallbacksController, type: :controller do
 
         before do
           allow(Spree::UserAuthentication).to receive(:find_by).and_return(nil)
-          allow(controller).to receive(:auth_hash).and_return('provider' => 'facebook', 'info' => { 'email' => 'spree@gmail.com' }, 'uid' => '123')
+          allow(controller).to receive(:auth_hash).and_return('provider' => 'github', 'info' => { 'email' => 'spree@gmail.com' }, 'uid' => '123')
         end
 
         context "email doesn't belongs to anyone" do

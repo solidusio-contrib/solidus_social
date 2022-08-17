@@ -34,7 +34,7 @@ RSpec.describe 'Admin Authentication Methods', :js do
   context 'when auth method exists' do
     let!(:authentication_method) do
       Spree::AuthenticationMethod.create!(
-        provider: 'facebook',
+        provider: 'github',
         api_key: 'fake',
         api_secret: 'fake',
         environment: Rails.env,

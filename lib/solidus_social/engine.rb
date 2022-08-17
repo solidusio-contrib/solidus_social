@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require 'omniauth-facebook'
 require 'omniauth-github'
 require 'omniauth-google-oauth2'
 require 'deface'
 require 'spree/core'
 require 'solidus_social/social_configuration'
-require 'solidus_social/facebook_omniauth_strategy_ext'
 
 module SolidusSocial
   class Engine < Rails::Engine
