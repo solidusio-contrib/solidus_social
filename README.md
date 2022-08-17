@@ -6,7 +6,7 @@ SolidusSocial
 
 Social login support for Solidus. Solidus Social handles authorization, account
 creation and association through third-party services.
-Currently Facebook, Github and Google OAuth2 are available out of the box.
+Currently Github and Google OAuth2 are available out of the box.
 
 Installation
 ------------
@@ -44,7 +44,7 @@ Click "New Authentication Method" and choose one of your configured providers.
 Registering Your Application
 ----------------------------
 
-Facebook, Github and Google OAuth2 are supported out of the
+Github and Google OAuth2 are supported out of the
 box but, you will need to register your application with each of the sites you
 want to use.
 
@@ -52,17 +52,6 @@ When setting up development applications, keep in mind that most services do
 not support `localhost` for your URL/domain. You will need to us a regular
 domain (i.e.  `domain.tld`, `hostname.local`) or an IP addresses (`127.0.0.1`).
 Make sure you specifity the right IP address.
-
-### Facebook
-
-[Facebook / Developers / Apps][2]
-
-1. Name the app and agree to the terms.
-2. Fill out the capcha.
-3. Under the "Web Site" tab enter:
-  - Site URL: `http://yourhostname.local:3000` for development and
-    `http://your-site.com` for production
-  - Site domain: `yourhostname.local` and `your-site.com` respectively
 
 ### Github
 
@@ -190,7 +179,6 @@ License
 Copyright (c) 2014 [John Dyer][7] and [contributors][8], released under the [New BSD License][9]
 
 [1]: https://github.com/spree/spree
-[2]: https://developers.facebook.com/apps/?action=create
 [3]: https://github.com/settings/applications/new
 [4]: http://www.fsf.org/licensing/essays/free-sw.html
 [5]: https://github.com/solidusio-contrib/solidus_social/issues
