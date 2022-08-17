@@ -8,11 +8,8 @@
   * Set 280% font size below per default.
   *
   * Only includes normal and circle icons for:
-  * - Facebook
   * - Github
   * - Google+ for Google Oauth2
-  * - Twitter
-  * - Amazon
   */
 
 @font-face {
@@ -54,11 +51,5 @@
 }
 .icon-spree-github:before { content: '\e800'; } /* '' */
 .icon-spree-github-circled:before { content: '\e801'; } /* '' */
-.icon-spree-twitter:before { content: '\e802'; } /* '' */
-.icon-spree-twitter-circled:before { content: '\e803'; } /* '' */
-.icon-spree-facebook:before { content: '\e804'; } /* '' */
-.icon-spree-facebook-circled:before { content: '\e805'; } /* '' */
 .icon-spree-google-oauth2:before { content: '\e806'; } /* '' */
 .icon-spree-google-oauth2-circled:before { content: '\e807'; } /* '' */
-.icon-spree-amazon:before { content: '\e808'; } /* '' */
-.icon-spree-amazon-circled:before { content: '\e808'; } /* '' */
