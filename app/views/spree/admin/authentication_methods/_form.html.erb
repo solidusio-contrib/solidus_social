@@ -1,5 +1,5 @@
 <div data-hook="admin_social_methods_form_fields" class="row">
-  <div class="alpha five columns">
+  <div class="col-4">
     <div data-hook="environment" class="field">
       <%= f.field_container :environment do %>
         <%= label_tag nil, Spree::AuthenticationMethod.human_attribute_name(:environment) %>
@@ -7,7 +7,7 @@
       <% end %>
     </div>
   </div>
-  <div class="alpha five columns">
+  <div class="col-4">
     <div data-hook="environment" class="field">
       <%= f.field_container :provider do %>
         <%= f.label :provider, I18n.t('spree.social_provider') %>
@@ -15,14 +15,12 @@
       <% end %>
     </div>
   </div>
-  <div class="alpha five columns">
+  <div class="col-4">
     <div data-hook="environment" class="field">
       <%= f.field_container :active do %>
-        <span style="padding:0 10px 2px;"><%= f.label :active, I18n.t('spree.active') %></span>
-        <%= f.radio_button :active, :true %>
-        <span style="padding:0 2px;"><%= I18n.t('spree.say_yes') %></span>
-        <%= f.radio_button :active, :false %>
-        <span style="padding:0 2px"><%= I18n.t('spree.say_no') %></span>
+        <%= f.label :active, I18n.t('spree.active') %><br>
+        <%= f.radio_button :active, :true %><span style="padding:0 2px;"><%= I18n.t('spree.say_yes') %></span>
+        <%= f.radio_button :active, :false %><span style="padding:0 2px"><%= I18n.t('spree.say_no') %></span>
       <% end %>
     </div>
   </div>
