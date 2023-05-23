@@ -8,7 +8,6 @@ en:
     add_another_service: "Add another service to sign in with:"
     authentications:
       destroy: 'Successfully destroyed authentication method.'
-    back_to_authentication_methods_list: "Back To Authentication Methods List"
     edit_social_method: "Editing Social Authentication Method"
     environment: "Environment"
     new_social_method: "New Authentication Method"
