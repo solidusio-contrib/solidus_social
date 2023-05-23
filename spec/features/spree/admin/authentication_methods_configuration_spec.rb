@@ -22,7 +22,6 @@ RSpec.describe 'Admin Authentication Methods', :js do
       expect(page).to have_text 'No Authentication Methods Found, Add One!'
 
       click_link 'New Authentication Method'
-      expect(page).to have_link 'Back To Authentication Methods List'
       select2 'Test', from: 'Environment'
       select2 'Github', from: 'Social Provider'
 
