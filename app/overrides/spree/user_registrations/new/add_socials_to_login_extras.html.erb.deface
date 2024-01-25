@@ -1,0 +1,3 @@
+<!-- insert_after '[data-hook="login_extras"]' -->
+
+<%= render partial: 'spree/shared/social' unless session[:omniauth] %>
