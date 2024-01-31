@@ -1,0 +1,3 @@
+<!-- replace 'div#new-customer h6' -->
+
+<%= render partial: 'spree/users/new-customer' %>
