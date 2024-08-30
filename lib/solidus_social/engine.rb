@@ -7,7 +7,7 @@ require 'omniauth/twitter2'
 require 'omniauth/rails_csrf_protection'
 require 'deface'
 require 'spree/core'
-require 'solidus_social/social_configuration'
+require 'solidus_social/config'
 require 'solidus_social/facebook_omniauth_strategy_ext'
 
 module SolidusSocial
