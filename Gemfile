@@ -29,7 +29,7 @@ when 'mysql'
 when 'postgresql'
   gem 'pg'
 else
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.3'
 end
 
 gemspec
