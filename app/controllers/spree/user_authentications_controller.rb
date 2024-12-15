@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Spree::UserAuthenticationsController < Spree::StoreController
+class Spree::UserAuthenticationsController < Spree::BaseController
   def index
     @authentications = spree_current_user.user_authentications if spree_current_user
   end

@@ -12,7 +12,8 @@ module SolidusSocial
       end
 
       def apply_omniauth(omniauth)
-        if omniauth.fetch('info', {})['email'].present?
+        skip_signup_providers = SpreeSocial::OAUTH_PROVIDERS.map { |p| p[1] if p[2] == 'true' }.compact
+        if skip_signup_providers.include? omniauth['provider']
           self.email = omniauth['info']['email'] if email.blank?
         end
         user_authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])

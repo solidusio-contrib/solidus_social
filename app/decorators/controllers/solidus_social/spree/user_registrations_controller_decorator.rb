@@ -21,7 +21,7 @@ module SolidusSocial
         session[:omniauth] = nil unless @spree_user.new_record?
       end
 
-      ::Spree::UserRegistrationsController.prepend self
+      UserRegistrationsController.prepend self
     end
   end
 end
