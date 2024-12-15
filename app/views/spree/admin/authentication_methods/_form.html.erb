@@ -13,7 +13,9 @@
       <div data-hook="environment" class="field">
         <%= f.field_container :provider do %>
           <%= f.label :provider, I18n.t('spree.social_provider') %>
-          <%= f.select :provider, Spree::AuthenticationMethod.provider_options, {}, { include_blank: false, class: 'select2 fullwidth' } %>
+          <%= f.select :provider,
+            SolidusSocial::OAUTH_PROVIDERS.collect { |p| [ p[0], p[1] ] },{},
+            { include_blank: false, class: 'select2' } %>
         <% end %>
       </div>
     </div>
