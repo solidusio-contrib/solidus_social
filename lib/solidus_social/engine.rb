@@ -22,19 +22,5 @@ module SolidusSocial
     config.generators do |g|
       g.test_framework :rspec
     end
-
-    USER_DECORATOR_PATH = root.join(
-      "app/decorators/models/solidus_social/spree/user_decorator.rb"
-    ).to_s
-
-    initializer 'solidus_social.decorate_spree_user' do |app|
-      next unless app.respond_to?(:reloader)
-
-      app.reloader.after_class_unload do
-        # Reload and decorate the spree user class immediately after it is
-        # unloaded so that it is available to devise when loading routes
-        load USER_DECORATOR_PATH
-      end
-    end
   end
 end
