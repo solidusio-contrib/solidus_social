@@ -28,7 +28,7 @@ RSpec.describe Spree::User, type: :model do
       let(:user) { create(:user) { |user| user.email = nil } }
       let(:omni_params) do
         {
-          'provider' => 'any_provider',
+          'provider' => 'google_oauth2',
           'uid' => 12_345,
           'info' => { 'email' => 'test@example.com' }
         }
