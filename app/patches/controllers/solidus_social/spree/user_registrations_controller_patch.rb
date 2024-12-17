@@ -2,7 +2,7 @@
 
 module SolidusSocial
   module Spree
-    module UserRegistrationsControllerDecorator
+    module UserRegistrationsControllerPatch
       def self.prepended(base)
         base.class_eval do
           after_action :clear_omniauth, only: :create

@@ -2,7 +2,7 @@
 
 module SolidusSocial
   module Spree
-    module UserDecorator
+    module UserPatch
       def self.prepended(base)
         base.class_eval do
           has_many :user_authentications, dependent: :destroy
