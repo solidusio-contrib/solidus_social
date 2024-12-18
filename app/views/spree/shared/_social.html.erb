@@ -1,17 +1,15 @@
-<div id="social-signin-links" class="text-center">
+<div id="social-signin-links">
   <% if (!spree_current_user || !spree_current_user.user_authentications) && Spree::AuthenticationMethod.active_authentication_methods? %>
     <h2><%= I18n.t('spree.sign_in_through_one_of_these_services') %></h2>
   <% end %>
 
-  <div class="flex justify-center">
-    <% Spree::AuthenticationMethod.available_for(spree_current_user).each do |method| %>
-      <% if method.active %>
-          <%= form_tag(spree.send("spree_user_#{method.provider}_omniauth_authorize_path", r: rand), method: 'post') do %>
-            <%= button_tag(type: 'submit', title: t('spree.sign_in_with', provider: method.provider)) do %>
-              <%= content_tag(:i, '', class: "icon-spree-#{method.provider.dasherize}-circled") %>
-            <% end %>
-          <% end %>
+  <% Spree::AuthenticationMethod.available_for(spree_current_user).each do |method| %>
+    <% if method.active %>
+      <%= form_tag(spree.send("spree_user_#{method.provider}_omniauth_authorize_path", r: rand), method: 'post') do %>
+        <%= button_tag(type: 'submit', title: t('spree.sign_in_with', provider: method.provider)) do %>
+          <%= content_tag(:i, '', class: "icon-spree-#{method.provider.dasherize}-circled") %>
+        <% end %>
       <% end %>
     <% end %>
-  </div>
+  <% end %>
 </div>

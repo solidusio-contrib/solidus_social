@@ -12,4 +12,9 @@ class Spree::AuthenticationMethod < ActiveRecord::Base
     sc = sc.where.not(provider: user.user_authentications.pluck(:provider)) if user && !user.user_authentications.empty?
     sc
   }
+
+  def provider_name
+    provider = SolidusSocial::OAUTH_PROVIDERS.find { |oauth_provider| oauth_provider[1] == self.provider }
+    provider ? provider[0].capitalize : nil
+  end
 end
