@@ -24,6 +24,8 @@ RSpec.describe 'Admin Authentication Methods', :js do
       click_link 'New Authentication Method'
       select2 'Test', from: 'Environment'
       select2 'Github', from: 'Social Provider'
+      fill_in 'API Key', with: 'test_api_key'
+      fill_in 'API Secret', with: 'test_api_secret'
 
       click_button 'Create'
       expect(page).to have_text 'successfully created!'

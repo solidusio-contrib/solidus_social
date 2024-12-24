@@ -7,7 +7,7 @@ RSpec.describe SolidusSocial do
     it 'contain all providers' do
       oauth_providers = [
         %w(Facebook facebook true),
-        %w(Github github false),
+        %w(Github github true),
         %w(Google google_oauth2 true),
         %w(Twitter twitter2 false)
       ]

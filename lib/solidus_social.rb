@@ -12,7 +12,7 @@ module SolidusSocial
   OAUTH_PROVIDERS = [
     %w(Facebook facebook true),
     %w(Twitter twitter2 false),
-    %w(Github github false),
+    %w(Github github true),
     %w(Google google_oauth2 true)
   ]
 

@@ -21,7 +21,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def omniauth_callback
     if request.env['omniauth.error'].present?
       flash[:error] = I18n.t('devise.omniauth_callbacks.failure', kind: auth_hash['provider'], reason: I18n.t('spree.user_was_not_valid'))
-      redirect_back_or_default(main_app.root_url)
+      redirect_back_or_default(spree.login_path)
       return
     end
 
@@ -66,5 +66,9 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || spree.account_path
   end
 end
