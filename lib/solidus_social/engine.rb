@@ -27,9 +27,8 @@ module SolidusSocial
       load AUTHENTICATION_METHOD_PATH
     end
 
-    # use rspec for tests
-    config.generators do |g|
-      g.test_framework :rspec
+    initializer 'solidus_social.initialize_providers' do
+      SolidusSocial.initialize_oauth_providers
     end
 
     USER_DECORATOR_PATH = root.join(
@@ -44,6 +43,11 @@ module SolidusSocial
         # unloaded so that it is available to devise when loading routes
         load USER_DECORATOR_PATH
       end
+    end
+
+    # use rspec for tests
+    config.generators do |g|
+      g.test_framework :rspec
     end
   end
 end

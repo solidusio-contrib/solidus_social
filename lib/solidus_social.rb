@@ -16,15 +16,25 @@ module SolidusSocial
     %w(Google google_oauth2 true)
   ]
 
-  # Setup all OAuth providers
-  def self.init_provider(provider)
+  def self.initialize_oauth_providers
     begin
-      ActiveRecord::Base.connection_pool.with_connection(&:active?)
-    rescue
-      return
+      ActiveRecord::Base.connection_pool.with_connection do
+        if ActiveRecord::Base.connection.data_source_exists?('spree_authentication_methods')
+          OAUTH_PROVIDERS.each do |provider|
+            init_provider(provider[1])
+          end
+        else
+          Rails.logger.warn("[Solidus Social] Database table 'spree_authentication_methods' does not exist.")
+        end
+      end
+    rescue ActiveRecord::NoDatabaseError => e
+      Rails.logger.error("[Solidus Social] Database not found: #{e.message}")
+    rescue => e
+      Rails.logger.error("[Solidus Social] An error occurred while initializing providers: #{e.message}")
     end
+  end
 
-    return unless ActiveRecord::Base.connection.data_source_exists?('spree_authentication_methods')
+  def self.init_provider(provider)
     key, scope, secret = nil
     ::Spree::AuthenticationMethod.where(environment: ::Rails.env).each do |auth_method|
       next unless auth_method.provider == provider

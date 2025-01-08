@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-SolidusSocial::OAUTH_PROVIDERS.each do |provider|
-  SolidusSocial.init_provider(provider[1])
-end
-
 OmniAuth.config.logger = Logger.new(STDOUT)
 OmniAuth.logger.progname = 'omniauth'
 
