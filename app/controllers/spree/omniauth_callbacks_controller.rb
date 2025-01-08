@@ -43,7 +43,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else
         session[:omniauth] = auth_hash.except('extra')
         flash[:notice] = I18n.t('spree.one_more_step', kind: auth_hash['provider'].capitalize)
-        redirect_to new_spree_user_registration_url
+        redirect_to signup_url
         return
       end
     end

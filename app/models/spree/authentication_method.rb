@@ -17,4 +17,13 @@ class Spree::AuthenticationMethod < ActiveRecord::Base
     provider = SolidusSocial::OAUTH_PROVIDERS.find { |oauth_provider| oauth_provider[1] == self.provider }
     provider ? provider[0].capitalize : nil
   end
+
+  def oauth_scope
+    case provider
+    when 'twitter2'
+      'tweet.read users.read'
+    else
+      nil
+    end
+  end
 end

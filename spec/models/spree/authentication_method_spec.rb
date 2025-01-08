@@ -84,4 +84,16 @@ RSpec.describe Spree::AuthenticationMethod do
       end
     end
   end
+
+  describe '#oauth_scope' do
+    it 'returns the default scope for twitter2' do
+      auth_method = described_class.new(provider: 'twitter2')
+      expect(auth_method.oauth_scope).to eq('tweet.read users.read')
+    end
+
+    it 'returns nil for other providers' do
+      auth_method = described_class.new(provider: 'facebook')
+      expect(auth_method.oauth_scope).to be_nil
+    end
+  end
 end

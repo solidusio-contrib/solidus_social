@@ -25,19 +25,20 @@ module SolidusSocial
     end
 
     return unless ActiveRecord::Base.connection.data_source_exists?('spree_authentication_methods')
-    key, secret = nil
+    key, scope, secret = nil
     ::Spree::AuthenticationMethod.where(environment: ::Rails.env).each do |auth_method|
       next unless auth_method.provider == provider
-      key = auth_method.api_key
+      key    = auth_method.api_key
       secret = auth_method.api_secret
+      scope  = auth_method.oauth_scope
       Rails.logger.info("[Solidus Social] Loading #{auth_method.provider.capitalize} as authentication source")
     end
-    setup_key_for(provider.to_sym, key, secret)
+    setup_key_for(provider.to_sym, key, secret, scope)
   end
 
-  def self.setup_key_for(provider, key, secret)
+  def self.setup_key_for(provider, key, secret, scope)
     Devise.setup do |config|
-      config.omniauth provider, key, secret, setup: true, info_fields: 'email, name'
+      config.omniauth provider, key, secret, scope: scope, setup: true, info_fields: 'email, name'
     end
   end
 end
