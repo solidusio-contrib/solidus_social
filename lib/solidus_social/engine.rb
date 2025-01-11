@@ -27,10 +27,6 @@ module SolidusSocial
       load AUTHENTICATION_METHOD_PATH
     end
 
-    initializer 'solidus_social.initialize_providers' do
-      SolidusSocial.initialize_oauth_providers
-    end
-
     USER_DECORATOR_PATH = root.join(
       "app/decorators/models/solidus_social/spree/user_decorator.rb"
     ).to_s
