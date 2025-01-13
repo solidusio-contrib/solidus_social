@@ -40,8 +40,12 @@ RSpec.describe Spree::AuthenticationMethod do
   describe '.active_authentication_methods?' do
     subject { described_class.active_authentication_methods? }
 
-    let!(:active_method) { Spree::AuthenticationMethod.create!(provider: 'facebook', environment: Rails.env, api_key: 'test', api_secret: 'test', active: true) }
-    let!(:inactive_method) { Spree::AuthenticationMethod.create!(provider: 'google_oauth2', environment: Rails.env, api_key: 'test', api_secret: 'test', active: false) }
+    let!(:active_method) {
+      Spree::AuthenticationMethod.create!(provider: 'facebook', environment: Rails.env, api_key: 'test', api_secret: 'test', active: true)
+    }
+    let!(:inactive_method) {
+      Spree::AuthenticationMethod.create!(provider: 'google_oauth2', environment: Rails.env, api_key: 'test', api_secret: 'test', active: false)
+    }
 
     context 'when there are active authentication methods' do
       it { is_expected.to be true }
@@ -55,12 +59,16 @@ RSpec.describe Spree::AuthenticationMethod do
   end
 
   describe '.available_for' do
-    let(:user) { create(:user) }
-    let!(:auth_method_1) { Spree::AuthenticationMethod.create!(provider: 'facebook', environment: Rails.env, api_key: 'test', api_secret: 'test', active: true) }
-    let!(:auth_method_2) { Spree::AuthenticationMethod.create!(provider: 'google_oauth2', environment: Rails.env, api_key: 'test', api_secret: 'test', active: true) }
-    let!(:user_authentication) { Spree::UserAuthentication.create(user: user, uid: 'uniq_id', provider: 'facebook') }
-
     subject { described_class.available_for(user) }
+
+    let(:user) { create(:user) }
+    let!(:auth_method_1) {
+      Spree::AuthenticationMethod.create!(provider: 'facebook', environment: Rails.env, api_key: 'test', api_secret: 'test', active: true)
+    }
+    let!(:auth_method_2) {
+      Spree::AuthenticationMethod.create!(provider: 'google_oauth2', environment: Rails.env, api_key: 'test', api_secret: 'test', active: true)
+    }
+    let!(:user_authentication) { Spree::UserAuthentication.create(user: user, uid: 'uniq_id', provider: 'facebook') }
 
     context 'when the user has no authentications' do
       let(:user) { create(:user, user_authentications: []) }

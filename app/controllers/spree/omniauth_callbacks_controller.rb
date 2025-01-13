@@ -15,7 +15,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   SolidusSocial::OAUTH_PROVIDERS.each do |provider|
-    provides_callback_for provider[1].to_sym
+    provides_callback_for provider.key.to_sym
   end
 
   def omniauth_callback

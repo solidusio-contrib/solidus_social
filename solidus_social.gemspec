@@ -12,7 +12,6 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/solidusio-contrib/solidus_social#readme'
   spec.license = 'BSD-3-Clause'
 
-
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/solidusio-contrib/solidus_social'
   spec.metadata['changelog_uri'] = 'https://github.com/solidusio-contrib/solidus_social/blob/master/CHANGELOG.md'

@@ -6,10 +6,10 @@ RSpec.describe SolidusSocial do
 
     it 'contain all providers' do
       oauth_providers = [
-        %w(Facebook facebook true),
-        %w(Github github true),
-        %w(Google google_oauth2 true),
-        %w(Twitter twitter2 false)
+        SolidusSocial::Provider.new("Facebook", "facebook", true),
+        SolidusSocial::Provider.new("Twitter", "twitter2", false),
+        SolidusSocial::Provider.new("GitHub", "github", true),
+        SolidusSocial::Provider.new("Google", "google_oauth2", true)
       ]
       expect(described_class::OAUTH_PROVIDERS).to match_array oauth_providers
     end

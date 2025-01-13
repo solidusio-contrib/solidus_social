@@ -14,7 +14,7 @@
         <%= f.field_container :provider do %>
           <%= f.label :provider, I18n.t('spree.social_provider') %>
           <%= f.select :provider,
-            SolidusSocial::OAUTH_PROVIDERS.collect { |p| [ p[0], p[1] ] },{},
+            SolidusSocial::OAUTH_PROVIDERS.collect { |p| [ p.title, p.key ] },{},
             { include_blank: false, class: 'select2' } %>
         <% end %>
       </div>
