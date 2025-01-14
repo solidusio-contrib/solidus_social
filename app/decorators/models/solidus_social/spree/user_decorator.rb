@@ -12,7 +12,7 @@ module SolidusSocial
       end
 
       def apply_omniauth(omniauth)
-        skip_signup_providers = SolidusSocial::OAUTH_PROVIDERS.map { |p| p.key if p.skip_signup == true }.compact
+        skip_signup_providers = SolidusSocial::OAUTH_PROVIDERS.select { |provider| provider.skip_signup }.map(&:key)
         if skip_signup_providers.include?(omniauth['provider']) && email.blank?
           self.email = omniauth['info']['email']
         end
