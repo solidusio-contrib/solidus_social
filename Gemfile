@@ -32,6 +32,9 @@ else
   gem 'sqlite3', '~> 1.4'
 end
 
+# Temporarily link solidus_support with Flickwerk support
+gem "solidus_support", github: "mamhoff/solidus_support", branch: "re-enable-flickwerk"
+
 gemspec
 
 # Use a local Gemfile to include development dependencies that might not be
