@@ -9,7 +9,6 @@ require 'deface'
 require 'spree/core'
 require 'solidus_social/config'
 require 'solidus_social/facebook_omniauth_strategy_ext'
-require 'solidus_social/solidus_support'
 
 module SolidusSocial
   class Engine < Rails::Engine
