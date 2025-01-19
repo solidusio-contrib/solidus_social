@@ -27,6 +27,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     authentication = Spree::UserAuthentication.find_by(provider: auth_hash['provider'], uid: auth_hash['uid'])
+
     if authentication.present? && authentication.try(:user).present?
       flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: auth_hash['provider'])
       sign_in_and_redirect :spree_user, authentication.user
@@ -44,7 +45,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else
         session[:omniauth] = auth_hash.except('extra')
         flash[:notice] = I18n.t('spree.one_more_step', kind: auth_hash['provider'].capitalize)
-        redirect_to signup_url
+        redirect_to resolve_route_for(:new_spree_user_registration_url)
         return
       end
     end
@@ -58,7 +59,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     set_flash_message :alert, :failure, kind: failed_strategy.name.to_s.humanize, reason: failure_message
-    redirect_to resolve_route_for(:root_url)
+    redirect_to resolve_route_for(:login_path)
   end
 
   def passthru
