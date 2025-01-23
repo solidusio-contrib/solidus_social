@@ -20,8 +20,12 @@ module SolidusSocial
       def clear_omniauth
         session[:omniauth] = nil unless @spree_user.new_record?
       end
-
-      ::Spree::UserRegistrationsController.prepend self
     end
   end
+end
+
+if defined?(::UserRegistrationsController)
+  ::UserRegistrationsController.prepend SolidusSocial::Spree::UserRegistrationsControllerDecorator
+else
+  ::Spree::UserRegistrationsController.prepend SolidusSocial::Spree::UserRegistrationsControllerDecorator
 end

@@ -8,7 +8,7 @@ Spree::Core::Engine.routes.draw do
     path: Spree::SocialConfig[:path_prefix]
   resources :user_authentications
 
-  get 'account' => 'users#show', as: 'user_root'
+  get 'account', to: 'users#show', as: 'user_root'
 
   namespace :admin do
     resources :authentication_methods

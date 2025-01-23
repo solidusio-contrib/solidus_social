@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-class Spree::AuthenticationMethod < ApplicationRecord
-  def self.provider_options
-    SolidusSocial.configured_providers.map { |provider_name| [provider_name.split("_").first.camelize, provider_name] }
-  end
-
-  validates :provider, presence: true
+class Spree::AuthenticationMethod < ActiveRecord::Base
+  validates :provider, :api_key, :api_secret, presence: true
 
   def self.active_authentication_methods?
     where(environment: ::Rails.env, active: true).exists?
@@ -13,7 +9,19 @@ class Spree::AuthenticationMethod < ApplicationRecord
 
   scope :available_for, lambda { |user|
     sc = where(environment: ::Rails.env)
-    sc = sc.where(['provider NOT IN (?)', user.user_authentications.map(&:provider)]) if user && !user.user_authentications.empty?
+    sc = sc.where.not(provider: user.user_authentications.pluck(:provider)) if user && !user.user_authentications.empty?
     sc
   }
+
+  def provider_name
+    provider = SolidusSocial::OAUTH_PROVIDERS.find { |oauth_provider| oauth_provider.key == self.provider }
+    provider ? provider.title.capitalize : nil
+  end
+
+  def oauth_scope
+    case provider
+    when 'twitter2'
+      'tweet.read users.read'
+    end
+  end
 end

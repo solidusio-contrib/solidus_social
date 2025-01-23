@@ -6,7 +6,8 @@ SolidusSocial
 
 Social login support for Solidus. Solidus Social handles authorization, account
 creation and association through third-party services.
-Currently Facebook, Github and Google OAuth2 are available out of the box.
+Currently Google, Facebook, Github and X (formely Twitter) are available out of the box.
+Support for Apple ID and Microsoft (Entra and O365) might be offered down the road. 
 
 Installation
 ------------
@@ -25,12 +26,15 @@ bundle exec rails g solidus_social:install
 bundle exec rails db:migrate
 ```
 
-This will install a new initializer `config/initializers/solidus_social.rb` into
-your project that allows you to setup the services you want configured for your app.
+Preference(optional): By default the login path will be `/users/auth/:provider`. If you wish to modify the url to: 
+`/member/auth/:provider`, `/profile/auth/:provider`, or `/auth/:provider` then you can do this accordingly in 
+your **config/initializers/spree.rb** file as described below:
 
-Optional: By default the login path will be '/users/auth/:provider'. If you
-want something else, configure it in `config/initializers/solidus_social.rb`.
-
+```ruby
+Spree::SocialConfig[:path_prefix] = 'member'  # for /member/auth/:provider
+Spree::SocialConfig[:path_prefix] = 'profile' # for /profile/auth/:provider
+Spree::SocialConfig[:path_prefix] = ''        # for /auth/:provider
+```
 
 Using OAuth Sources
 -------------------
@@ -39,12 +43,29 @@ Login as an admin user and navigate to Configuration > Social Authentication Met
 
 Click "New Authentication Method" and choose one of your configured providers.
 
+Click on the New Authentication Method button to enter the key obtained from their respective source, (See below for instructions on setting up the various providers).
+
+Multiple key entries can now be entered based on the rails environment. This allows for portability and the lack of need to check in your key to your repository. You also have the ability to enable and disable sources. These setting will be reflected on the client UI as well.
+
+Alternatively you can ship keys as environment variables and create these Authentication Method records on application boot via an initializer. Below is an example for facebook.
+
+```ruby
+# Ensure our environment is bootstrapped with a facebook connect app
+if ActiveRecord::Base.connection.data_source_exists? 'spree_authentication_methods'
+  Spree::AuthenticationMethod.where(environment: Rails.env, provider: 'facebook').first_or_create do |auth_method|
+    auth_method.api_key = ENV['FACEBOOK_APP_ID']
+    auth_method.api_secret = ENV['FACEBOOK_APP_SECRET']
+    auth_method.active = true
+  end
+end
+```
+
 **You MUST restart your application after configuring or updating an authentication method.**
 
 Registering Your Application
 ----------------------------
 
-Facebook, Github and Google OAuth2 are supported out of the
+OAuth Applications @ Facebook, Twitter, Google and / or Github are supported out of the
 box but, you will need to register your application with each of the sites you
 want to use.
 
@@ -86,72 +107,46 @@ Make sure you specifity the right IP address.
 
 > More info: [https://developers.google.com/identity/protocols/OAuth2](https://developers.google.com/identity/protocols/OAuth2)
 
-### Other OAuth Providers
+### Twitter
+[Twitter / Application Management / Create an application](https://docs.x.com/resources/fundamentals/authentication/oauth-2-0/overview)
 
-Other OAuth providers are supported, given that there is an [OmniAuth
-strategy][12] for them. (If there isn't, you can [write one][13].)
+1. Name and Description must be filled in with something
+2. Configure user authentication setting with:
+ - App permissions: Read (default) and enable Request email from users option.
+ - Application Website: http://your_computer.local:3000 for development / http://your-site.com for production
+ - Application Type: Web App, Automated App or Bot
+ - Callback URL: http://your_computer.local:3000 for development / http://your-site.com for production
+3. Save Application
 
-#### LinkedIn Example
+### Adding other OAuth sources
 
-1. Add `gem "omniauth-linkedin"` to your Gemfile and run `bundle install`.
-2. In `config/initializers/solidus_social.rb` add and initialize a new provider
-   for SolidusSocial:
+It is easy to add any OAuth source, given there is an OmniAuth strategy gem for it (and if not, you can easily write one by yourself). For instance, if you want to add authorization via LinkedIn, the steps will be:
+1. Add gem `"omniauth-linkedin"` to your Gemfile, run `bundle install`.
+2. In an initializer file, e.g. `config/initializers/devise.rb`, add and init a new provider for SolidusSocial:
 
-   ```ruby
+**Optional:** If you want to skip the sign up phase where the user has to provide an email and a password, add a third parameter to the provider entry and the Spree user will be created directly using the email field in the [Auth Hash Schema](https://github.com/omniauth/omniauth/wiki/Auth-Hash-Schema):
 
-     config.providers = {
-       # The configuration key has to match your omniauth strategy.
-       linkedin: {
-         api_key: ENV['LINKEDIN_API_KEY'],
-         api_secret: ENV['LINKEDIN_API_SECRET'],
-       },
-       # More providers here
-   ```
-3. Activate your provider as usual.
+```ruby
+Provider = Struct.new(:title, :key, :skip_signup)
+SolidusSocial::OAUTH_PROVIDERS << Provider.new("LinkedIn", "linkedin", true)
+SolidusSocial.init_provider('linkedin')
+```
+3. Activate your provider as usual (via initializer or admin interface).
 4. Do **one** of the following:
 
-   - Override the `spree/users/social` view to render OAuth links to display
-     your LinkedIn link.
+   - For legacy frontend, override the `spree/users/social` view to render OAuth links to display
+     your LinkedIn link and for starter frontend override `spree/starter_frontend/shared/social`.
    - Include in your CSS a definition for `.icon-spree-linkedin-circled` and an
-     embedded icon font for LinkedIn from [Fontello][14] (the way existing
+     embedded icon font for LinkedIn from [Fontello](12) (the way existing
      icons for Facebook etc are implemented). You can also override
      CSS classes for other providers, `.icon-spree-<provider>-circled`, to use
      different font icons or classic background images, without having to
      override views.
 
-#### Apple Id Example
-
-1. Add `gem "omniauth-apple"` to your Gemfile and run `bundle install`.
-2. In `config/initializers/solidus_social.rb` add and initialize a new provider
-   for SolidusSocial:
-
-   ```ruby
-
-     config.providers = {
-        apple:          {
-          icon:   'fa-apple',
-          title:  'Apple'
-        },
-       # More providers here
-   ```
-   add its configuration after `SolidusSocial.init_providers` line:
-   ```ruby
-   
-     Devise.setup do |config|
-       # The configuration key has to match your omniauth strategy.
-       config.omniauth :apple, ENV['APPLE_CLIENT_ID'], '',
-                       scope:    'email',
-                       team_id:  ENV['APPLE_TEAM_ID'],
-                       key_id:   ENV['APPLE_KEY_ID'],
-                       pem:      ENV['APPLE_PRIVATE_KEY'].gsub('\n', "\n")
-     end
-   ```
-   Notice: APPLE_PRIVATE_KEY should consist from one-line p8-file content, like this `'\n-----BEGIN PRIVATE KEY-----\nsecret\n-----END PRIVATE KEY-----\n'`
-
 Documentation
 -------------
 
-API documentation is available [on RubyDoc.info][15].
+API documentation is available [on RubyDoc.info][13].
 
 Contributing
 ------------

@@ -1,27 +1,50 @@
-<div data-hook="admin_social_methods_form_fields" class="row">
-  <div class="col-4">
-    <div data-hook="environment" class="field">
-      <%= f.field_container :environment do %>
-        <%= label_tag nil, Spree::AuthenticationMethod.human_attribute_name(:environment) %>
-        <%= collection_select(:authentication_method, :environment, Rails.configuration.database_configuration.keys, :to_s, :titleize, {}, { class: 'select2 fullwidth' }) %>
-      <% end %>
+<div data-hook="admin_social_methods_form_fields">
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div data-hook="environment" class="field">
+        <%= f.field_container :environment do %>
+          <%= label_tag nil, Spree::AuthenticationMethod.human_attribute_name(:environment) %>
+          <%= collection_select(:authentication_method, :environment, Rails.configuration.database_configuration.keys, :to_s, :titleize, {}, { class: 'select2 fullwidth' }) %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div data-hook="environment" class="field">
+        <%= f.field_container :provider do %>
+          <%= f.label :provider, I18n.t('spree.social_provider') %>
+          <%= f.select :provider,
+            SolidusSocial::OAUTH_PROVIDERS.collect { |p| [ p.title, p.key ] },{},
+            { include_blank: false, class: 'select2' } %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="col-4">
-    <div data-hook="environment" class="field">
-      <%= f.field_container :provider do %>
-        <%= f.label :provider, I18n.t('spree.social_provider') %>
-        <%= f.select :provider, Spree::AuthenticationMethod.provider_options, {}, { include_blank: false, class: 'select2 fullwidth' } %>
-      <% end %>
+
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div data-hook="environment" class="form-group">
+        <%= f.label :api_key, I18n.t('spree.social_api_key') %>
+        <%= f.text_field :api_key, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div data-hook="environment" class="form-group">
+        <%= f.label :api_secret, I18n.t('spree.social_api_secret') %>
+        <%= f.text_field :api_secret, class: 'form-control' %>
+      </div>
     </div>
   </div>
-  <div class="col-4">
-    <div data-hook="environment" class="field">
-      <%= f.field_container :active do %>
-        <%= f.label :active, I18n.t('spree.active') %><br>
-        <%= f.radio_button :active, :true %><span style="padding:0 2px;"><%= I18n.t('spree.say_yes') %></span>
-        <%= f.radio_button :active, :false %><span style="padding:0 2px"><%= I18n.t('spree.say_no') %></span>
-      <% end %>
+
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div data-hook="environment" class="field">
+        <%= f.field_container :active do %>
+          <%= f.label :active, I18n.t('spree.active') %><br>
+          <%= f.radio_button :active, :true %><span style="padding:0 2px;"><%= I18n.t('spree.say_yes') %></span>
+          <%= f.radio_button :active, :false %><span style="padding:0 2px"><%= I18n.t('spree.say_no') %></span>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

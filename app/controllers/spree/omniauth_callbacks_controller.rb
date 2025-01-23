@@ -5,6 +5,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Store
+  include RouteResolver
 
   class << self
     def provides_callback_for(*providers)
@@ -14,14 +15,14 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  Spree::SocialConfig.providers.keys.each do |provider|
-    provides_callback_for provider
+  SolidusSocial::OAUTH_PROVIDERS.each do |provider|
+    provides_callback_for provider.key.to_sym
   end
 
   def omniauth_callback
     if request.env['omniauth.error'].present?
       flash[:error] = I18n.t('devise.omniauth_callbacks.failure', kind: auth_hash['provider'], reason: I18n.t('spree.user_was_not_valid'))
-      redirect_back_or_default(root_url)
+      redirect_back_or_default(resolve_route_for(:root_url))
       return
     end
 
@@ -34,7 +35,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       spree_current_user.apply_omniauth(auth_hash)
       spree_current_user.save!
       flash[:notice] = I18n.t('devise.sessions.signed_in')
-      redirect_back_or_default(account_url)
+      redirect_back_or_default(resolve_route_for(:account_url))
     else
       user = Spree.user_class.find_by(email: auth_hash['info']['email']) || Spree.user_class.new
       user.apply_omniauth(auth_hash)
@@ -44,7 +45,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else
         session[:omniauth] = auth_hash.except('extra')
         flash[:notice] = I18n.t('spree.one_more_step', kind: auth_hash['provider'].capitalize)
-        redirect_to new_spree_user_registration_url
+        redirect_to resolve_route_for(:new_spree_user_registration_url)
         return
       end
     end
@@ -58,7 +59,7 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     set_flash_message :alert, :failure, kind: failed_strategy.name.to_s.humanize, reason: failure_message
-    redirect_to spree.login_path
+    redirect_to resolve_route_for(:login_path)
   end
 
   def passthru
@@ -67,5 +68,9 @@ class Spree::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || resolve_route_for(:account_path)
   end
 end
