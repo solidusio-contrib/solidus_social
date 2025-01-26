@@ -26,5 +26,6 @@ es:
     social_provider: 'Proveedor social'
     please_confirm_your_email: 'Por favor confirme su email para continuar'
     sign_in_with: 'Autenticado con %{provider}'
+    stores: "Tiendas"
     you_have_signed_in_with_these_services: "Has iniciado sesión con estos servicios"
     environment: Ambiente

@@ -23,4 +23,5 @@ sv:
     social_provider: "Social tjänst"
     please_confirm_your_email: "Bekräfta din e-postadress för att fortsätta"
     sign_in_with: "Logga in med %{provider}"
+    stores: "Butiker"
     you_have_signed_in_with_these_services: "Du har loggat in via dessa tjänster"

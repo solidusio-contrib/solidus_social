@@ -23,4 +23,5 @@ it:
     social_provider: "Social Provider"
     please_confirm_your_email: "Per favore, conferma il tuo indirizzo e-mail per continuare."
     sign_in_with: "Login con %{provider}"
+    stores: "Negozi"
     you_have_signed_in_with_these_services: "Hai fatto log-in con questi servizi"

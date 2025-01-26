@@ -1,4 +1,4 @@
-<% if Spree::AuthenticationMethod.active_authentication_methods? %>
+<% if Spree::AuthenticationMethod.available_to_store(current_store).active_authentication_methods? %>
   <% @body_id = 'login' %>
   <div id="existing-customer">
     <% if spree_current_user.user_authentications %>
@@ -20,7 +20,7 @@
       <% end %>
     <% end %>
 
-    <% if Spree::AuthenticationMethod.available_for(spree_current_user).present? %>
+    <% if available_authentication_methods(current_store, spree_current_user).present? %>
       <%= content_tag(:p, content_tag(:strong, I18n.t('spree.add_another_service'))) %>
       <%= render 'spree/shared/social' %>
     <% end %>

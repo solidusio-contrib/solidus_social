@@ -23,4 +23,5 @@ de:
     social_provider: "Social Anbieter"
     please_confirm_your_email: "Bitte bestätige deine Emailadresse um fortzufahren"
     sign_in_with: "Mit %{provider} einloggen"
+    stores: "Geschäfte"
     you_have_signed_in_with_these_services: "Sie haben mit diesen Diensten unterzeichnet"
