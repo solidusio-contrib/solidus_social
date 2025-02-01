@@ -23,5 +23,7 @@ en:
     social_provider: "Social Provider"
     please_confirm_your_email: "Please confirm your email address to continue"
     sign_in_with: "Login with %{provider}"
-    stores: "Stores"
     you_have_signed_in_with_these_services: "You Have Signed In With These Services"
+    admin:
+      tab:
+        social_authentication_methods: "Social Authentication Methods"

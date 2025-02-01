@@ -41,7 +41,7 @@
       <div class="col-12 col-lg-6">
         <div data-hook="stores" class="field">
           <%= f.field_container :stores do %>
-            <%= label_tag :authentication_method_stores, I18n.t('spree.stores') %>
+            <%= f.label :stores  %>
             <%= f.collection_check_boxes :store_ids, available_stores, :id, :name do |b| %>
               <div class="custom-control custom-checkbox mb-1">
                 <%= b.check_box(class: 'custom-control-input') %>
