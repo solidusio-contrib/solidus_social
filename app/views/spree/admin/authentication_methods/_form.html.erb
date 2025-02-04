@@ -10,12 +10,10 @@
     </div>
 
     <div class="col-12 col-lg-6">
-      <div data-hook="environment" class="field">
+      <div data-hook="provider" class="field">
         <%= f.field_container :provider do %>
-          <%= f.label :provider, I18n.t('spree.social_provider') %>
-          <%= f.select :provider,
-            SolidusSocial::OAUTH_PROVIDERS.collect { |p| [ p.title, p.key ] },{},
-            { include_blank: false, class: 'select2' } %>
+          <%= label_tag nil, I18n.t('spree.social_provider') %>
+          <%= collection_select(:authentication_method, :provider, SolidusSocial::OAUTH_PROVIDERS, :key, :title, {}, { class: 'select2 fullwidth' }) %>
         <% end %>
       </div>
     </div>
@@ -23,13 +21,13 @@
 
   <div class="row">
     <div class="col-12 col-lg-6">
-      <div data-hook="environment" class="form-group">
+      <div data-hook="api_key" class="form-group">
         <%= f.label :api_key, I18n.t('spree.social_api_key') %>
         <%= f.text_field :api_key, class: 'form-control' %>
       </div>
     </div>
     <div class="col-12 col-lg-6">
-      <div data-hook="environment" class="form-group">
+      <div data-hook="api_secret" class="form-group">
         <%= f.label :api_secret, I18n.t('spree.social_api_secret') %>
         <%= f.text_field :api_secret, class: 'form-control' %>
       </div>
@@ -41,7 +39,7 @@
       <div class="col-12 col-lg-6">
         <div data-hook="stores" class="field">
           <%= f.field_container :stores do %>
-            <%= label_tag :authentication_method_stores, I18n.t('spree.stores') %>
+            <%= f.label :stores  %>
             <%= f.collection_check_boxes :store_ids, available_stores, :id, :name do |b| %>
               <div class="custom-control custom-checkbox mb-1">
                 <%= b.check_box(class: 'custom-control-input') %>
