@@ -18,12 +18,12 @@ en:
     sign_in_through_one_of_these_services: "Sign in through one of these services:"
     social_api_key: "API Key"
     social_api_secret: "API Secret"
-    social_authentication_methods: "Social Authentication Methods"
-    social_authentication_methods_description: "Setup OAuth Authentication Methods"
+    social_auth: "Social Auth"
+    social_auth_description: "Setup OAuth Authentication Methods"
     social_provider: "Social Provider"
     please_confirm_your_email: "Please confirm your email address to continue"
     sign_in_with: "Login with %{provider}"
     you_have_signed_in_with_these_services: "You Have Signed In With These Services"
     admin:
       tab:
-        social_authentication_methods: "Social Authentication Methods"
+        social_auth: "Social Auth"
