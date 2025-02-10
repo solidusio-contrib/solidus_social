@@ -2,7 +2,6 @@ SolidusSocial
 =============
 
 [![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_social.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_social)
-[![Code Climate](https://codeclimate.com/github/solidusio-contrib/solidus_social/badges/gpa.svg)](https://codeclimate.com/github/solidusio-contrib/solidus_social)
 
 Social login support for Solidus. Solidus Social handles authorization, account
 creation and association through third-party services.
