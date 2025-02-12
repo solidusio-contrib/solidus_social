@@ -7,13 +7,7 @@ solidus_branch = ENV.fetch('SOLIDUS_BRANCH', 'main')
 gem 'solidus', github: 'solidusio/solidus', branch: solidus_branch
 
 # The solidus_frontend gem has been pulled out since v3.2
-if solidus_branch >= 'v3.2'
-  gem 'solidus_frontend'
-elsif solidus_branch == 'main'
-  gem 'solidus_frontend', github: 'solidusio/solidus_frontend'
-else
-  gem 'solidus_frontend', github: 'solidusio/solidus', branch: solidus_branch
-end
+gem 'solidus_frontend'
 
 # Needed to help Bundler figure out how to resolve dependencies,
 # otherwise it takes forever to resolve them.
