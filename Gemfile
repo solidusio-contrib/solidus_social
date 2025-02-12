@@ -29,7 +29,7 @@ when 'mysql'
 when 'postgresql'
   gem 'pg'
 else
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.3'
 end
 
 if ["v4.1", "v4.2"].include?(solidus_branch)
