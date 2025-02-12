@@ -1,13 +1,13 @@
 SolidusSocial
 =============
 
-[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_social.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_social)
+[![Test](https://github.com/solidusio-contrib/solidus_social/actions/workflows/test.yml/badge.svg)](https://github.com/solidusio-contrib/solidus_social/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/solidusio-contrib/solidus_social/badges/gpa.svg)](https://codeclimate.com/github/solidusio-contrib/solidus_social)
 
 Social login support for Solidus. Solidus Social handles authorization, account
 creation and association through third-party services.
 Currently Google, Facebook, Github and X (formely Twitter) are available out of the box.
-Support for Apple ID and Microsoft (Entra and O365) might be offered down the road. 
+Support for Apple ID and Microsoft (Entra and O365) might be offered down the road.
 
 Installation
 ------------
@@ -26,8 +26,8 @@ bundle exec rails g solidus_social:install
 bundle exec rails db:migrate
 ```
 
-Preference(optional): By default the login path will be `/users/auth/:provider`. If you wish to modify the url to: 
-`/member/auth/:provider`, `/profile/auth/:provider`, or `/auth/:provider` then you can do this accordingly in 
+Preference(optional): By default the login path will be `/users/auth/:provider`. If you wish to modify the url to:
+`/member/auth/:provider`, `/profile/auth/:provider`, or `/auth/:provider` then you can do this accordingly in
 your **config/initializers/spree.rb** file as described below:
 
 ```ruby
