@@ -9,10 +9,8 @@ gem 'solidus', github: 'solidusio/solidus', branch: solidus_branch
 # The solidus_frontend gem has been pulled out since v3.2
 gem 'solidus_frontend'
 
-# Needed to help Bundler figure out how to resolve dependencies,
-# otherwise it takes forever to resolve them.
-# See https://github.com/bundler/bundler/issues/6677
-gem 'rails', '>0.a'
+rails_requirement_string = ENV.fetch('RAILS_VERSION', '~> 7.0')
+gem 'rails', rails_requirement_string
 
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise'
