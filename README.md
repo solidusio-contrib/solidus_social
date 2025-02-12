@@ -1,7 +1,7 @@
 SolidusSocial
 =============
 
-[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_social.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_social)
+[![Test](https://github.com/solidusio-contrib/solidus_social/actions/workflows/test.yml/badge.svg)](https://github.com/solidusio-contrib/solidus_social/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/solidusio-contrib/solidus_social/badges/gpa.svg)](https://codeclimate.com/github/solidusio-contrib/solidus_social)
 
 Social login support for Solidus. Solidus Social handles authorization, account
@@ -136,7 +136,7 @@ strategy][12] for them. (If there isn't, you can [write one][13].)
    ```
    add its configuration after `SolidusSocial.init_providers` line:
    ```ruby
-   
+
      Devise.setup do |config|
        # The configuration key has to match your omniauth strategy.
        config.omniauth :apple, ENV['APPLE_CLIENT_ID'], '',
