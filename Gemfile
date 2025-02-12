@@ -27,10 +27,6 @@ else
   gem 'sqlite3', sqlite_version
 end
 
-if ["v4.1", "v4.2"].include?(solidus_branch)
-  gem "concurrent-ruby", "< 1.3.5"
-end
-
 gemspec
 
 # Use a local Gemfile to include development dependencies that might not be
