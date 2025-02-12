@@ -7,18 +7,10 @@ solidus_branch = ENV.fetch('SOLIDUS_BRANCH', 'main')
 gem 'solidus', github: 'solidusio/solidus', branch: solidus_branch
 
 # The solidus_frontend gem has been pulled out since v3.2
-if solidus_branch >= 'v3.2'
-  gem 'solidus_frontend'
-elsif solidus_branch == 'main'
-  gem 'solidus_frontend', github: 'solidusio/solidus_frontend'
-else
-  gem 'solidus_frontend', github: 'solidusio/solidus', branch: solidus_branch
-end
+gem 'solidus_frontend'
 
-# Needed to help Bundler figure out how to resolve dependencies,
-# otherwise it takes forever to resolve them.
-# See https://github.com/bundler/bundler/issues/6677
-gem 'rails', '>0.a'
+rails_requirement_string = ENV.fetch('RAILS_VERSION', '~> 7.0')
+gem 'rails', rails_requirement_string
 
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise'
@@ -29,11 +21,10 @@ when 'mysql'
 when 'postgresql'
   gem 'pg'
 else
-  gem 'sqlite3', '~> 1.4'
-end
+  rails_version = Gem::Requirement.new(rails_requirement_string).requirements[0][1]
+  sqlite_version = rails_version < Gem::Version.new(7.2) ? "~> 1.4" : "~> 2.0"
 
-if ["v4.1", "v4.2"].include?(solidus_branch)
-  gem "concurrent-ruby", "< 1.3.5"
+  gem 'sqlite3', sqlite_version
 end
 
 gemspec
