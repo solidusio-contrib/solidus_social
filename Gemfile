@@ -34,3 +34,5 @@ gemspec
 send :eval_gemfile, 'Gemfile-local' if File.exist? 'Gemfile-local'
 
 gem "csv", "~> 3.3"
+
+gem "solidus_dev_support", github: "solidusio/solidus_dev_support", branch: "fix-flaky-chrome"
