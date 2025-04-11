@@ -34,3 +34,8 @@ gemspec
 send :eval_gemfile, 'Gemfile-local' if File.exist? 'Gemfile-local'
 
 gem "csv", "~> 3.3"
+
+if rails_version < Gem::Version.new(7.1)
+  # https://github.com/rails/rails/issues/54271
+  gem "concurrent-ruby", "< 1.3.5"
+end
