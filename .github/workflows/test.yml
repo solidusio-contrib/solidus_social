@@ -23,7 +23,6 @@ jobs:
       fail-fast: true
       matrix:
         rails-version:
-          - "7.0"
           - "7.1"
           - "7.2"
         ruby-version:
@@ -49,8 +48,6 @@ jobs:
             solidus-branch: "v4.2"
           - rails-version: "7.1"
             solidus-branch: "v4.1"
-          - ruby-version: "3.4"
-            rails-version: "7.0"
     env:
       TEST_RESULTS_PATH: coverage/coverage.xml
     steps:
