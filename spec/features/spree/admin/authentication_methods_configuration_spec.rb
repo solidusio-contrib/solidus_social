@@ -7,7 +7,7 @@ RSpec.describe 'Admin Authentication Methods', :js do
     it 'has configuration tab' do
       visit spree.admin_path
       click_link 'Settings'
-      expect(page).to have_text(/Social Authentication Methods/i)
+      expect(page).to have_text(/Social Auth/i)
     end
   end
 
@@ -15,7 +15,7 @@ RSpec.describe 'Admin Authentication Methods', :js do
     before do
       visit spree.admin_path
       click_link 'Settings'
-      click_link 'Social Authentication Methods'
+      click_link 'Social Auth'
     end
 
     it 'can create new' do
@@ -46,7 +46,7 @@ RSpec.describe 'Admin Authentication Methods', :js do
     before do
       visit spree.admin_path
       click_link 'Settings'
-      click_link 'Social Authentication Methods'
+      click_link 'Social Auth'
     end
 
     it 'can be updated' do

@@ -23,5 +23,7 @@ pt-BR:
     social_provider: "Provedor Social"
     please_confirm_your_email: "Por favor confirme seu endereço de e-mail para continuar"
     sign_in_with: "Login com %{provider}"
-    stores: "Lojas"
     you_have_signed_in_with_these_services: "Você se cadastrou com estes serviços"
+    admin:
+      tab:
+        social_authentication_methods: "Métodos de Autenticação Social"

@@ -23,5 +23,7 @@ fr:
     social_provider: "Réseau Social"
     please_confirm_your_email: "Confirmez votre adresse courriel avant de continuer"
     sign_in_with: "Identification via %{provider}"
-    stores: "Magasins"
     you_have_signed_in_with_these_services: "Vous avez signé avec ces services"
+    admin:
+      tab:
+        social_authentication_methods: "Services d'identification via Réseau Sociaux"

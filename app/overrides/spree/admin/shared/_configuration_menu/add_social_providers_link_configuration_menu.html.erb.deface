@@ -1,5 +1,0 @@
-<!-- insert_bottom '[data-hook="admin_configurations_sidebar_menu"]' -->
-
-<% if can? :admin, Spree::AuthenticationMethod %>
-  <%= configurations_sidebar_menu_item I18n.t("spree.social_authentication_methods"), spree.admin_authentication_methods_path %>
-<% end %>

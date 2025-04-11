@@ -1,10 +1,6 @@
-<%= render 'spree/admin/shared/configuration_menu' %>
-
-<% admin_breadcrumb(link_to I18n.t('spree.social_authentication_methods'), spree.admin_authentication_methods_path) %>
-
-<% content_for :page_title do %>
-  <%= I18n.t('spree.new_social_method') %>
-<% end %>
+<% admin_breadcrumb(t('spree.settings')) %>
+<% admin_breadcrumb(link_to I18n.t('spree.social_auth'), spree.admin_authentication_methods_path) %>
+<% admin_breadcrumb(t('spree.new_social_method')) %>
 
 <%= render 'spree/shared/error_messages', target: @authentication_method %>
 
