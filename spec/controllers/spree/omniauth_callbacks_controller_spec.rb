@@ -9,7 +9,7 @@ RSpec.describe Spree::OmniauthCallbacksController, type: :controller do
     Rails.application.routes.default_url_options[:host] = 'test.host'
     request.env['omniauth.auth'] = omni_params
     allow(controller).to receive(:sign_in_and_redirect)
-    allow(controller).to receive(:redirect_back_or_default)
+    allow(controller).to receive(:redirect_to)
     allow(Spree::User).to receive(:anonymous!).with(user)
   end
 
@@ -17,7 +17,7 @@ RSpec.describe Spree::OmniauthCallbacksController, type: :controller do
     before { request.env['omniauth.error'] = 'FAIL' }
 
     it 'redirects properly' do
-      expect(controller).to receive(:redirect_back_or_default)
+      expect(controller).to receive(:redirect_to)
       controller.github
     end
 
@@ -95,7 +95,7 @@ RSpec.describe Spree::OmniauthCallbacksController, type: :controller do
         end
 
         it 'redirects properly' do
-          expect(controller).to receive(:redirect_back_or_default)
+          expect(controller).to receive(:redirect_to)
           controller.github
         end
 
