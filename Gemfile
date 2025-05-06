@@ -9,7 +9,7 @@ gem 'solidus', github: 'solidusio/solidus', branch: branch
 # The solidus_frontend gem has been pulled out since v3.2
 gem 'solidus_frontend'
 
-rails_requirement_string = ENV.fetch('RAILS_VERSION', '~> 7.0')
+rails_requirement_string = ENV.fetch('RAILS_VERSION', '~> 7.1')
 gem 'rails', rails_requirement_string
 
 # Provides basic authentication functionality for testing parts of your engine
@@ -32,3 +32,7 @@ gemspec
 # Use a local Gemfile to include development dependencies that might not be
 # relevant for the project or for other contributors, e.g.: `gem 'pry-debug'`.
 send :eval_gemfile, 'Gemfile-local' if File.exist? 'Gemfile-local'
+
+gem "csv", "~> 3.3"
+
+gem "solidus_dev_support", github: "solidusio/solidus_dev_support", branch: "fix-flaky-chrome"
