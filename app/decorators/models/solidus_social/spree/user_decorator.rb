@@ -12,10 +12,10 @@ module SolidusSocial
       end
 
       def apply_omniauth(omniauth)
-        if omniauth.fetch('info', {})['email'].present?
-          self.email = omniauth['info']['email'] if email.blank?
+        if omniauth.fetch("info", {})["email"].present?
+          self.email = omniauth["info"]["email"] if email.blank?
         end
-        user_authentications.build(provider: omniauth['provider'], uid: omniauth['uid'])
+        user_authentications.build(provider: omniauth["provider"], uid: omniauth["uid"])
       end
 
       def password_required?

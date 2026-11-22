@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'omniauth-facebook'
-require 'omniauth-github'
-require 'omniauth-google-oauth2'
-require 'omniauth/twitter2'
-require 'omniauth/rails_csrf_protection'
-require 'deface'
-require 'spree/core'
-require 'solidus_social/config'
-require 'solidus_social/facebook_omniauth_strategy_ext'
+require "omniauth-facebook"
+require "omniauth-github"
+require "omniauth-google-oauth2"
+require "omniauth/twitter2"
+require "omniauth/rails_csrf_protection"
+require "deface"
+require "spree/core"
+require "solidus_social/config"
+require "solidus_social/facebook_omniauth_strategy_ext"
 
 module SolidusSocial
   class Engine < Rails::Engine
@@ -16,7 +16,7 @@ module SolidusSocial
 
     isolate_namespace ::Spree
 
-    engine_name 'solidus_social'
+    engine_name "solidus_social"
 
     # use rspec for tests
     config.generators do |g|
@@ -27,7 +27,7 @@ module SolidusSocial
       "app/decorators/models/solidus_social/spree/user_decorator.rb"
     ).to_s
 
-    initializer 'solidus_social.decorate_spree_user' do |app|
+    initializer "solidus_social.decorate_spree_user" do |app|
       next unless app.respond_to?(:reloader)
 
       app.reloader.after_class_unload do
